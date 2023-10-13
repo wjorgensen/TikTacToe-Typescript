@@ -1,4 +1,4 @@
-let board: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+let board: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 let turn: number = 1;
 // Winner is false for x and true for o
 let winner: boolean = false;
@@ -7,7 +7,7 @@ let gameFinished: boolean = false;
 //DOM manipulation
 
 function updateBoard(space: number) {
-    if (board[space] == 0) {
+    if (board[space] == 0 && !gameFinished) {
         board[space] = turn;
         turn = turn * -1;
         // Update the board
@@ -22,12 +22,24 @@ function updateBoard(space: number) {
             console.error("Button with id " + space + " not found");
         }
     }
+    else if(board[space] != 0) {
+        alert("Space already taken!")
+    }
+    else{
+        alert("Game is over!")
+    }
     checkForWin();
     if (gameFinished) {
         if (winner) {
-            alert("O Wins!");
+            let updater = document.getElementById("game-won");
+            if(updater !== null){
+                updater.textContent = "X Wins!";
+               }
         } else {
-            alert("X Wins!");
+            let updater = document.getElementById("game-won");
+            if(updater !== null){
+             updater.textContent = "O Wins!";
+            }
         }
     }
 }
