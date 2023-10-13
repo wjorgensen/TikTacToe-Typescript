@@ -4,23 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TikTacToe</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body id="body">
     <p>Let's Play A Game</p>
-    <div id="row 1">
-        <button id="1" onclick="updateBoard(1)"></button>
-        <button id="2" onclick="updateBoard(2)"></button>
-        <button id="3" onclick="updateBoard(3)"></button>
-    </div>
-    <div id="row 2">
-        <button id="4" onclick="updateBoard(4)"></button>
-        <button id="5" onclick="updateBoard(5)"></button>
-        <button id="6" onclick="updateBoard(6)"></button>
-    </div>
-    <div id="row 3">
-        <button id="7" onclick="updateBoard(7)"></button>
-        <button id="8" onclick="updateBoard(8)"></button>
-        <button id="9" onclick="updateBoard(9)"></button>
+    <div id="board">
+        <div class="row" id="row1">
+            <button id="1" onclick="updateBoard(1)"></button>
+            <button id="2" onclick="updateBoard(2)"></button>
+            <button id="3" onclick="updateBoard(3)"></button>
+        </div>
+        <div class="row" id="row2">
+            <button id="4" onclick="updateBoard(4)"></button>
+            <button id="5" onclick="updateBoard(5)"></button>
+            <button id="6" onclick="updateBoard(6)"></button>
+        </div>
+        <div class="row" id="row3">
+            <button id="7" onclick="updateBoard(7)"></button>
+            <button id="8" onclick="updateBoard(8)"></button>
+            <button id="9" onclick="updateBoard(9)"></button>
+        </div>
     </div>
     <p id="game-won"></p>
     <script src="js/script.js"></script>

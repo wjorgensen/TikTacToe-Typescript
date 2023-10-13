@@ -1,5 +1,6 @@
 let board: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 let turn: number = 1;
+let plays: number = 0;
 // Winner is false for x and true for o
 let winner: boolean = false;
 let gameFinished: boolean = false;
@@ -7,9 +8,10 @@ let gameFinished: boolean = false;
 //DOM manipulation
 
 function updateBoard(space: number) {
-    if (board[space] == 0 && !gameFinished) {
+    if (board[space] == 0 && !gameFinished && plays < 9) {
         board[space] = turn;
         turn = turn * -1;
+        plays++;
         // Update the board
         let button = document.getElementById(""+space);
         if (button !== null) {
@@ -22,15 +24,31 @@ function updateBoard(space: number) {
             console.error("Button with id " + space + " not found");
         }
     }
-    else if(board[space] != 0) {
-        alert("Space already taken!")
+    else if(gameFinished) {
+        alert("Game is over!")
     }
     else{
-        alert("Game is over!")
+        alert("Space already taken!")
     }
     checkForWin();
     if (gameFinished) {
-        if (winner) {
+        let body = document.getElementById("body");
+        if(body !== null){
+            let button = document.createElement("button");
+            button.textContent = "Restart Game";
+            button.id = "restart";
+            button.onclick = function() {
+                location.reload();
+            }
+            body.appendChild(button);
+        }
+        if(plays >= 9){
+            let updater = document.getElementById("game-won");
+                if(updater !== null){
+                    updater.textContent = "Game is a draw!";
+                }
+        }
+        else if (winner) {
             let updater = document.getElementById("game-won");
             if(updater !== null){
                 updater.textContent = "X Wins!";
@@ -45,29 +63,32 @@ function updateBoard(space: number) {
 }
 
 function checkForWin() {
-    if (board[0] == board[1] && board[1] == board[2] && board[0] != 0) {
-        winner = board[0] == 1 ? false : true;
+    if(plays >= 9){
+        gameFinished = true;
+    }
+    else if (board[0] == board[1] && board[1] == board[2] && board[0] != 0) {
+        winner = board[0] == 1 ? true : false;
         gameFinished = true;
     } else if (board[3] == board[4] && board[4] == board[5] && board[3] != 0) {
-        winner = board[3] == 1 ? false : true;
+        winner = board[3] == 1 ? true : false;
         gameFinished = true;
     } else if (board[6] == board[7] && board[7] == board[8] && board[6] != 0) {
-        winner = board[6] == 1 ? false : true;
+        winner = board[6] == 1 ? true : false;
         gameFinished = true;
     } else if (board[0] == board[3] && board[3] == board[6] && board[0] != 0) {
-        winner = board[0] == 1 ? false : true;
+        winner = board[0] == 1 ? true : false;
         gameFinished = true;
     } else if (board[1] == board[4] && board[4] == board[7] && board[1] != 0) {
-        winner = board[1] == 1 ? false : true;
+        winner = board[1] == 1 ? true : false;
         gameFinished = true;
     } else if (board[2] == board[5] && board[5] == board[8] && board[2] != 0) {
-        winner = board[2] == 1 ? false : true;
+        winner = board[2] == 1 ? true : false;
         gameFinished = true;
     } else if (board[0] == board[4] && board[4] == board[8] && board[0] != 0) {
-        winner = board[0] == 1 ? false : true;
+        winner = board[0] == 1 ? true : false;
         gameFinished = true;
     } else if (board[2] == board[4] && board[4] == board[6] && board[2] != 0) {
-        winner = board[2] == 1 ? false : true;
+        winner = board[2] == 1 ? true : false;
         gameFinished = true;
     }
 }
